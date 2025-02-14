@@ -95,9 +95,8 @@ html,body {
     background-color: var(--color-main-accent);
     display: flex;
     flex-direction: column;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-    padding-left: 10rem;
+    padding:8rem;
+    align-items: center;
 }
 
 .logo{
@@ -297,11 +296,12 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+text-align: center;
+margin:3rem;
 }
 
 .intro .interactive-block .intro-name-first{
 color:var(--color-white);
-text-align: start;
 width: 100%;
 font-family: "Geologica Bold",sans-serif;
 font-size:96px;
@@ -309,7 +309,6 @@ font-size:96px;
 
 .intro .interactive-block .intro-name-second{
 color:var(--color-white);
-text-align: start;
 width: 100%;
 font-family: "Geologica Bold",sans-serif;
 font-size:96px;
@@ -680,7 +679,7 @@ color: var(--color-main-dark-accent)
     flex: 1;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding:1rem;
 }
 
 .carousel-track {
@@ -689,40 +688,71 @@ color: var(--color-main-dark-accent)
 }
 
 .carousel-item {
-    min-width: 100%;
+    flex: 0 0 calc(50% - 1rem);
     box-sizing: border-box;
     position: relative;
     background-color: white;
+    margin-right: 2rem; 
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+border-radius: 1rem;
 }
 
-.carousel-item .overlay-images {
+.carousel-item:last-child {
+    margin-right: 0;
+}
+.overlay-images {
+    padding-top: 1.5rem;
+    padding-bottom:1.5rem;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-main-likemagenta);
+    border-radius: 1rem 1rem 0 0;
+  }
+  
+  .images-container {
     position: relative;
-    height: 300px;
-    background-color: #004040;
-}
-
-.overlay-images img {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-}
-
-.overlay-images img:first-child {
-    z-index: 1;
-    opacity: 0.7;
-}
-
-.overlay-images img:last-child {
-    z-index: 2;
-    mix-blend-mode: multiply;
-}
+    max-width: 800px;
+  }
+  
+  .background-image,
+  .overlay-image {
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: cover; 
+    width: calc(80% - 1rem);
+  }
+  
+  .background-image {
+    filter: brightness(90%);
+    margin-top: 0rem;
+    margin-left: 0rem;
+  }
+  
+  .overlay-image {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
 
 .carousel-item .content {
     padding: 20px;
     text-align: center;
+    background-color: var(--color-main-likemagenta);
+    border-radius: 0 0 1rem 1rem;
+    color: white;
+    font-family: 'Geologica Regular';
+    font-size:13px;
+}
+.carousel-item .content h3 {
+    font-family: 'Geologica SemiBold';
+    font-size:13px;
 }
 
 .control {
@@ -776,7 +806,7 @@ color: var(--color-main-dark-accent)
 .intro-bg{
     background: var(--color-main-accent);
 }
-.services-bg{
+.carousel-bg{
     background: var(--color-white);
 }
 .steps-bg{
