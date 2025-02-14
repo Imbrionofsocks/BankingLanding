@@ -346,53 +346,6 @@ margin-top:80px;
         width:90%;
         height: 90%;
 }
-
-.advantages {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-}
-.advantages-title{
-    color: var(--color-main-dark-accent);
-    text-align: center;
-    font-family:'Geologica Bold';
-    font-size:32px;
-}
-.advantages-name{
-    color: var(--color-main-dark-accent);
-    text-align: center;
-    font-family:'Geologica Bold';
-    font-size:16px;
-    height:5rem;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-.advantages-picture{
-    display: flex;
-    justify-content: center;
-    height: auto;
-    width: 14rem;
-    background-color: var(--color-main-accent);
-}
-.advantages-picture svg{
-    height: auto;
-    width: 14rem;
-}
-.advantages-content{
-    padding-top:3rem;
-    display:flex;
-    flex-direction: row;
-    gap:2rem;
-}
-.advantages-item{
- border-radius: 0.75rem;
- outline: 1px solid transparent;
- overflow: hidden;
- box-shadow: 0px 8px 33px -4px rgba(66, 68, 90, 0.29);
-}
 .faq {
     display: flex;
     flex-direction: column;
@@ -617,18 +570,33 @@ color: var(--color-main-dark-accent)
     padding-bottom: 8rem;
 }
 .steps-content{
-    font-family: 'Geologica Regular';
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap:2rem;
-    padding-top:2.5rem;
-    padding-bottom:2.5rem;
+    font-family: 'Geologica SemiBold';
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    gap:2.5rem;
+    padding:3rem;
     font-size: 24px;
+}
+.steps-left-column,
+.steps-right-column
+{
+display: flex;
+flex-direction: column;
+max-width: 31.25rem;
+padding: 1rem;
 }
 .steps-title{
     color: var(--color-main-dark-accent);
     font-family: 'Geologica Bold';
     font-size:32px;
+    max-height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    inline-size: 30rem;
+    overflow-wrap: break-word;
+    text-align: center;
 }
 .steps-subtitle{
     color: var(--color-main-dark-accent);
@@ -663,9 +631,14 @@ color: var(--color-main-dark-accent)
 }
 .steps-item{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 7.5rem;
+    gap:1rem;
+    min-width: 31.25rem;
+font-size: 20px;
+
 }
 
 .carousel-wrapper {
@@ -898,9 +871,6 @@ border-radius: 1rem;
         width: 20rem;
         height: auto;
     }
-    .advantages-content{
-        flex-direction: column;
-    }
     .service-content{
         grid-template-rows: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr;
@@ -910,10 +880,6 @@ border-radius: 1rem;
     }
     .header-title{
         display:none;
-    }
-    .advantages-picture svg{
-        width: auto;
-        height: auto;
     }
     .form-item{
         width: 100%;
@@ -980,7 +946,47 @@ border-radius: 1rem;
     }
 
 }
+.advantages {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.advantages-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    padding:10rem;
+    }
+.advantages-item{
+    display: flex;
+    width:19rem;
+    height: 19rem;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    background-color: white;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    padding: 1.5rem;
+    margin: 1.5rem;
+}
+.advantages-icon{
+padding-bottom: 2rem;
 
+}
+.advantages-icon svg{
+    width: 5rem;
+    height: 5rem;
+}
+.advantages-title{
+font-family: 'Geologica SemiBold';
+font-size: 18px;
+padding-bottom: 1rem;
+}
+.advantages-text{
+    font-family: 'Geologica Regular';
+    font-size: 16px;
+}
 
 
 .tel-btn:hover, 
