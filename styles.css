@@ -7,6 +7,7 @@
 --color-gray: #9A9A9A;
 --color-light-gray:#EEEEEE;
 --color-white: #FFFFFF;
+--color-gold:#BFAD80;
 }
 @font-face { 
     font-family: 'Geologica Regular'; 
@@ -16,6 +17,15 @@
          url('fonts/geologica/Geologica-Regular.woff') format('woff'),
          url('fonts/geologica/Geologica-Regular.ttf')  format('truetype'),   
          url('fonts/geologica/Geologica-Regular.otf') format('otf')
+}
+@font-face { 
+    font-family: 'Roboto'; 
+    font-weight: normal; 
+    font-style: normal; 
+    src: url('fonts/Roboto/Roboto-Regular.woff2') format('woff2'),
+         url('fonts/Roboto/Roboto-Regular.woff') format('woff'),
+         url('fonts/Roboto/Roboto-Regular.ttf')  format('truetype'),   
+         url('fonts/Roboto/Roboto-Regular.otf') format('otf')
 }
 @font-face { 
     font-family: 'Geologica Bold'; 
@@ -63,6 +73,7 @@ html,body {
     padding-left:10rem;
     padding-right:10rem;
     min-height: 5.25rem;
+
 }
 .header-name{
     display: flex;
@@ -115,23 +126,31 @@ html,body {
 }
 .footer-name{
     display: flex;
-    font-family: 'Geologica Regular';
+    font-family: 'Geologica Bold';
     align-items: center;
-    font-size:24px;
+    font-size:32px;
     color:var(--color-white);
+    inline-size: 32rem;
+    text-align: start;
 }
 .footer-content{
     width: 80%;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    border-top: 1px solid var(--color-light-gray);
+    display: flex; 
+    border-bottom: 1px solid var(--color-light-gray);
     margin-top:1rem;
     padding:1rem;
-}
+    justify-content: space-between;
 
+}
+.footer-socials-block{
+    display: flex;
+    gap:0.5rem;
+}
 .footer-prices{
-border-right: 1px solid var(--color-light-gray);
-border-left: 1px solid var(--color-light-gray);
+font-family: 'Geologica Regular';
+font-size: 16px;
+display: flex;
+gap:1.5rem;
 }
 .footer-prices-title{
     font-family:'Geologica Bold';
@@ -185,9 +204,47 @@ border-left: 1px solid var(--color-light-gray);
         padding-right:10rem;
 }
 .footer-foot{
-    font-family: 'Geologica Regular';
+    font-family: 'Roboto';
     font-size:13px;
+    padding: 1rem;
 }
+.footer-interactive-block{
+display: flex;  
+gap:2rem;
+padding:2.75rem;
+}
+.footer-interactive-item{
+    display:flex;
+    flex-direction: column;
+align-items: center;
+padding: 1.25rem;
+
+width: 31.875rem;
+height: 9.75rem;
+
+background: var(--color-gray);
+border-radius: 0.75rem;
+}
+.footer-interactive-title{
+    font-family: 'Geologica SemiBold';
+    font-size:20px;
+    padding-bottom: 1.25rem;
+}
+.footer-interactive-times{
+    font-family: 'Geologica Regular';
+    font-size:12px;
+    color:var(--color-light-gray);
+    text-align: start;
+    width: 100%;
+    padding-bottom: 1.25rem;
+}
+.footer-interactive-info{
+    font-family: 'Geologica Regular';
+    font-size:16px;
+    text-align: start;
+    width: 100%;
+}
+
 .tariff-card {
     background-color: #143a36;
     color: white;
@@ -327,9 +384,32 @@ width: 100%;
 display: flex;
 justify-content: start;
 gap:5rem;
-margin-top:80px;
 flex-direction: row;
 justify-content: center;
+}
+.intro-adv-block{
+    display: flex;
+    gap:3rem;
+    padding:3rem;
+}
+.adv-count{
+font-family: 'Geologica Bold';
+font-size:32px;
+color:var(--color-gold);
+}
+.adv-name{
+    font-family: 'Geologica SemiBold';
+    font-size:20px;
+    color:white;
+}
+.intro-hint-block{
+
+}
+.intro-hint-title{
+font-family: 'Geologica Regular';
+font-size:16px;
+color:white;
+padding-bottom: 2rem;
 }
 .intro .picture-block{
     width: 100%;
@@ -348,6 +428,37 @@ justify-content: center;
 .intro .picture-block svg{
         width:90%;
         height: 90%;
+}
+.intro-hint-button-block{
+    display:flex;
+    gap:3rem;
+    justify-content: center;
+}
+.consult-button{
+    display: flex;
+    background-color:var(--color-gold);
+    color:white;
+    font-family:'Geologica SemiBold';
+    font-size:20px;
+    width: 21.875rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+.pricing-button{
+    display: flex;
+    background-color:white;
+    color:var(--color-main-likemagenta);
+    font-family:'Geologica SemiBold';
+    font-size:20px;
+    width: 21.875rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
 }
 .faq {
     display: flex;
@@ -432,8 +543,22 @@ color: var(--color-main-dark-accent)
     align-items: center;
     justify-content: center;
     background-color: var(--color-main-likemagenta);
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.form-btn{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+width: 300px;
+height: 52px;
+font-family: 'Geologica SemiBold';
+font-size:20px;
+background: var(--color-gold);
+border-radius: 2rem;
+color:white;
 }
 
 .service-item{
@@ -521,18 +646,20 @@ min-height: 3rem;
     justify-content: start;
     gap: 2rem;
     padding: 2rem;
+    width: 28.125rem;
 }
 
 .form-title{
-    color: var(--color-white);
+    color: var(--color-gold);
     font-family: 'Geologica Bold';
     font-size:32px;
+    padding: 0.75rem;
 }
 
 .form-subtitle{
     color: var(--color-white);
-    font-family: 'Geologica Bold';
-    font-size:32px;
+    font-family: 'Geologica Regular';
+    font-size:16px;
 }
 .form-item{
     width: 100%;
@@ -546,16 +673,25 @@ min-height: 3rem;
 .form-name{
     color: var(--color-white);
     font-family: 'Geologica Regular';
-    font-size:24px;
+    font-size: 16px;
     padding-bottom: 0.5rem;
 }
 .form-cost{
-    color: var(--color-main-likemagenta);
+    color: var(--color-gray);
     font-family: 'Geologica Regular';
-    font-size:24px;
+    font-size:16px;
     border-radius: 0.75rem;
-    height: 3.25rem;
     width: 100%;
+    padding: 1rem;
+    border: 0.125rem solid gray;
+}
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color:white;
+    background: url("arrow_custom.svg") no-repeat right white;
+    background-position-x: calc(100% - 1rem);
 }
 .form-text{
     display: flex;
@@ -970,7 +1106,7 @@ align-items: center;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    padding:10rem;
+    padding:5rem;
     }
 .advantages-item{
     display: flex;
@@ -1009,10 +1145,19 @@ padding-bottom: 1rem;
 .red-btn-header:hover, 
 .red-btn:hover, 
 .intro .picture-block .button-block .red-btn:hover, 
-.intro .picture-block .button-block .white-btn:hover {
-    filter: brightness(1.1);
+.intro .picture-block .button-block .white-btn:hover, 
+.pricing-button:hover,
+.consult-button:hover,
+.form-btn:hover{
+    filter: brightness(1.05);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+}
+.header-title:hover{
+color:var(--color-gold);
+}
+.header-title{
+    color:var(--color-main-likemagenta);
 }
 
 .tel-btn:active, 
@@ -1020,7 +1165,10 @@ padding-bottom: 1rem;
 .red-btn-header:active, 
 .red-btn:active, 
 .intro .picture-block .button-block .red-btn:active, 
-.intro .picture-block .button-block .white-btn:active {
+.intro .picture-block .button-block .white-btn:active,
+.pricing-button:active,
+.consult-button:active,
+.form-btn:active {
     transform: scale(0.97);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
