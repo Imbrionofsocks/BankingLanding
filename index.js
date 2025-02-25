@@ -20,7 +20,6 @@ const getMimeType = (ext) => {
     return mimeTypes[ext] || 'application/octet-stream';
 };
 
-
 const sendTelegramMessage = async (message) => {
     const botToken = '8014313567:AAGYm39AA6G_nY9lR5K74Yw5oxK2uOUI6MU'; // Замените на ваш токен бота
     const chatId = '2134024173'; // Замените на ваш chat ID

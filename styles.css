@@ -134,6 +134,96 @@ html,body {
 .stages_list::-webkit-scrollbar {
     display: none;
 }
+.popup_block {
+    display: none; /* Изначально скрыт */
+    position: fixed;
+    top: 5%;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    max-width: 90%;
+    width: 600px;
+    overflow-y: auto;
+    max-height: 90vh;
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+    font-family: 'Geologica Regular';
+    font-size:16px;
+}
+
+.popup_block.active {
+    opacity: 1;
+}
+
+.inner_popup {
+    padding: 20px;
+}
+
+.fancybox-close-small {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.fancybox-close-small svg {
+    width: 24px;
+    height: 24px;
+}
+
+.law{
+    font-family: 'Geologica SemiBold';
+    font-size:16px;
+    color:var(--color-main-likemagenta);
+    background-color: var(--color-white);
+    padding:1rem;
+    border-radius: 0.25rem;
+}
+.law span{
+    color:var(--color-gold);
+}
+.law-link{
+text-decoration:underline;
+}
+
+ol {
+    counter-reset: item; /* Сбрасываем счетчик для основного списка */
+    list-style-type: none; /* Убираем стандартную нумерацию */
+    padding-left: 0; /* Убираем отступы по умолчанию */
+}
+
+ol > li {
+    counter-increment: item; /* Увеличиваем счетчик для каждого элемента */
+    margin-bottom: 10px; /* Отступ между пунктами */
+}
+
+ol > li:before {
+    content: counter(item) ". "; /* Добавляем нумерацию для основного списка */
+    font-weight: bold;
+}
+
+ol .sub-list {
+    counter-reset: sub-item; /* Сбрасываем счетчик для вложенного списка */
+    padding-left: 20px; /* Отступ для вложенного списка */
+}
+
+ol .sub-list > li {
+    counter-increment: sub-item; /* Увеличиваем счетчик для вложенного списка */
+}
+
+ol .sub-list > li:before {
+    content: counter(item) "." counter(sub-item) " "; /* Добавляем нумерацию для вложенного списка */
+    font-weight: bold;
+}
+.stages-title{
+    padding-top:1.5rem;
+    font-family:'Geologica SemiBold';
+    font-size:32px;
+    color: var(--color-main-dark-accent);
+}
 .gradient {
     position: absolute;
     top: 0;
@@ -1144,6 +1234,10 @@ cursor: pointer;
     background-color: #333;
 }
 @media (max-width: 768px) {
+    .popup_block {
+        width: 90%;
+        max-width: 90%;
+    }
     .control{
         display:none;
     }
@@ -1155,11 +1249,27 @@ cursor: pointer;
     }
 
     .carousel-item:not(:first-child) {
-        opacity: 0.5; /* Частичное отображение следующего элемента */
+        opacity: 0.5; 
     }
 
     .carousel-item.active {
-        opacity: 1; /* Полное отображение активного элемента */
+        opacity: 1; 
+    }
+    .advantages-item{
+        max-height: 12rem;
+        padding:0.5rem !important;
+    }
+    .advantages-title{
+        padding-bottom:0.5rem !important;
+    }
+    .advantages-icon{
+        padding-bottom:0.5rem !important;
+        width: 4rem;
+        height: 4rem;
+    }
+    .advantages-icon svg{
+        width: 4rem !important;
+        height: 4rem !important;
     }
 }
 
@@ -1303,31 +1413,15 @@ cursor: pointer;
 .side-sheet-content .side-sheet-red-btn-header {
     margin-bottom: 15px;
 }
-
-/* Затемнение фона */
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-.overlay.active {
-    display: block;
-}
 a{
     text-decoration: none;
 }
 
 
 @media (max-width: 900px) {
-    .burger-menu {
+.burger-menu {
         display: block;
-    }
+}
 .intro{
     flex-direction:column; 
     padding:0;
@@ -1684,4 +1778,5 @@ color:var(--color-gold);
 .overlay.active {
     opacity: 1;
     visibility: visible;
+    display:block;
 }

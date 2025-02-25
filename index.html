@@ -201,6 +201,28 @@
                     <a class="pricing-button" href="tel:+79275125252">
                       Узнать цены
                     </a>
+                    <a class = "law" href="#terms_use">
+                        <span>Важно! </span>Работаем строго по договору и в рамках <span class = "law-link"> ФЗ-127</span>
+                    </a>
+                    <div class="overlay" id="law-over"></div>
+                    <div class="popup_block fancybox-content" id="terms_use">
+                        <div class="inner_popup">
+                            <ol>
+                                <li>Гражданин обязан обратиться в арбитражный суд с заявлением о признании его банкротом в случае, если удовлетворение требований одного кредитора или нескольких кредиторов приводит к невозможности исполнения гражданином денежных обязательств и (или) обязанности по уплате обязательных платежей в полном объеме перед другими кредиторами и размер таких обязательств и обязанности в совокупности составляет не менее чем пятьсот тысяч рублей, не позднее тридцати рабочих дней со дня, когда он узнал или должен был узнать об этом.</li>
+                                <li>Гражданин вправе подать в арбитражный суд заявление о признании его банкротом в случае предвидения банкротства при наличии обстоятельств, очевидно свидетельствующих о том, что он не в состоянии исполнить денежные обязательства и (или) обязанность по уплате обязательных платежей в установленный срок, при этом гражданин отвечает признакам неплатежеспособности и (или) признакам недостаточности имущества.
+                                    <ol class="sub-list">
+                                        <li>Право на обращение в арбитражный суд с заявлением о признании гражданина, являющегося индивидуальным предпринимателем, банкротом возникает у такого гражданина при условии предварительного (не менее чем за пятнадцать календарных дней до дня обращения в арбитражный суд) опубликования им уведомления о намерении обратиться с заявлением о признании его банкротом путем включения этого уведомления в Единый федеральный реестр сведений о фактах деятельности юридических лиц.<br><br>
+                                            Копии заявления гражданина, являющегося индивидуальным предпринимателем, о признании его банкротом не подлежат направлению конкурсным кредиторам, в уполномоченные органы, а также в случаях, предусмотренных настоящим Федеральным законом, иным лицам.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                        <button type="button" class="fancybox-button fancybox-close-small" title="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 24 24">
+                                <path d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path>
+                            </svg>
+                        </button>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -249,6 +271,9 @@
     <div class="stages-bg">
       <div class="wrapper">
         <div class="stages">
+            <div class ="stages-title">
+                Этапы работы с нами
+            </div>
           <div class="progress-bar">
             <div class="progress"></div>
         </div>
@@ -1110,7 +1135,7 @@ function openModal(pdfPath) {
         modal.style.display = "block";
         document.body.classList.add("no-scroll");
 
-        if (window.innerWidth < 768) {
+        if (screen.width < 768) {
             const link = document.createElement('a');
             link.href = pdfPath;
             link.download = pdfPath.split('/').pop();
@@ -1322,7 +1347,35 @@ document.getElementById("submitForm").addEventListener("click", function() {
             momentumId = requestAnimationFrame(momentumLoop);
         }
 
+    document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('terms_use');
+    const closeButton = popup.querySelector('.fancybox-close-small');
+    const link = document.querySelector('.law');
+    const overlay = document.querySelector('#law-over');
+    const body = document.body;
 
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        overlay.classList.add('active');
+        popup.style.display = 'block';
+        body.classList.add('no-scroll');
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 10);
+    });
+
+    closeButton.addEventListener('click', function() {
+        popup.classList.remove('active');
+        overlay.classList.remove('active');
+        setTimeout(() => {
+            popup.style.display = 'none';
+            body.classList.remove('no-scroll');
+        }, 300);
+    });
+
+    
+});
 </script>
 </body>
 </html>
