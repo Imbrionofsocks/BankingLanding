@@ -1286,7 +1286,7 @@ cursor: pointer;
         flex: 0 0 calc(50% - 1rem);
     }
 }
-@media (max-width: 1600px) {
+@media (max-width: 1460px) {
     .advantages-content {
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(3, 1fr) !important;
