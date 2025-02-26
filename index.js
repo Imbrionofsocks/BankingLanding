@@ -16,6 +16,7 @@ const getMimeType = (ext) => {
         '.svg': 'image/svg+xml',
         '.json': 'application/json',
         '.ico': 'image/x-icon',
+        '.pdf': 'application/pdf',
     };
     return mimeTypes[ext] || 'application/octet-stream';
 };
