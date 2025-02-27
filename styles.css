@@ -905,6 +905,7 @@ font-size:20px;
 background: var(--color-gold);
 border-radius: 2rem;
 color:white;
+cursor:pointer
 }
 
 .service-item{
