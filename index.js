@@ -22,8 +22,8 @@ const getMimeType = (ext) => {
 };
 
 const sendTelegramMessage = async (message) => {
-    const botToken = '8014313567:AAGYm39AA6G_nY9lR5K74Yw5oxK2uOUI6MU'; // Замените на ваш токен бота
-    const chatId = '2134024173'; // Замените на ваш chat ID
+    const botToken = ''; // Замените на ваш токен бота
+    const chatId = ''; // Замените на ваш chat ID
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
     const response = await fetch(url, {
