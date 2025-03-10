@@ -21,28 +21,33 @@ const getMimeType = (ext) => {
     return mimeTypes[ext] || 'application/octet-stream';
 };
 
-const sendTelegramMessage = async (message) => {
-    const botToken = ''; // Замените на ваш токен бота
-    const chatId = ''; // Замените на ваш chat ID
+const sendTelegramMessage = async (message, chatIds) => {
+    const botToken = '8014313567:AAGYm39AA6G_nY9lR5K74Yw5oxK2uOUI6MU'; // Замените на ваш токен бота
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-        }),
-    });
+    for (const chatId of chatIds) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                }),
+            });
 
-    if (!response.ok) {
-        throw new Error('Ошибка при отправке сообщения в Telegram');
+            if (!response.ok) {
+                throw new Error(`Ошибка при отправке сообщения в Telegram для chat_id: ${chatId}`);
+            }
+
+            const data = await response.json();
+            console.log(`Сообщение отправлено в chat_id: ${chatId}`, data);
+        } catch (error) {
+            console.error(`Ошибка при отправке сообщения в chat_id: ${chatId}`, error);
+        }
     }
-
-    const data = await response.json();
-    return data;
 };
 
 const server = http.createServer((req, res) => {
@@ -60,14 +65,16 @@ const server = http.createServer((req, res) => {
             const phone = fields.phone;
             const debt = fields.debt;
             const mortgage = fields.mortgage;
-            const region = fields.region; 
+            const region = fields.region;
 
             console.log('Имя:', name, 'Телефон:', phone, 'Сумма долга:', debt, 'Есть ли просрочки:', mortgage, 'Регион:', region);
 
             const message = `Новая консультация:\nИмя: ${name}\nТелефон: ${phone}\nСумма долга: ${debt}\nЕсть ли просрочки: ${mortgage}\nРегион: ${region}`;
 
+            const chatIds = ['2134024173', '1683610381', '6612852848'];
+
             try {
-                await sendTelegramMessage(message);
+                await sendTelegramMessage(message, chatIds);
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end('Сообщение успешно отправлено в Telegram!');
             } catch (error) {
