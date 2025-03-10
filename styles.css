@@ -577,6 +577,21 @@ border-radius: 0.75rem;
     text-align: start;
     width: 100%;
 }
+.error-message {
+    color: red;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-family: 'Geologica Regular';
+    padding-bottom: 0.25rem;
+}
+
+.error-message.show {
+    visibility: visible;
+    opacity: 1;
+}
+
 .intro .interactive-block{
 width: 100%;
 display: flex;

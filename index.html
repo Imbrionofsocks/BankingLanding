@@ -928,45 +928,50 @@
               <div class="form-subtitle">
                   МЫ ПОДРОБНО ИЗУЧИМ ВАШ СЛУЧАЙ И ПРЕДЛОЖИМ УСЛОВИЯ ДЛЯ СОТРУДНИЧЕСТВА
               </div>
-              <div class="form-content">
+              <form class="form-content" id="form-content">
                   <div class="form-item">
                       <div class="form-text">
                           <div class="form-name">ФИО</div>
                           <input class="form-cost" name="name" placeholder="Введите ваши ФИО" required>
+                          <div class="error-message" id="nameError"></div>
                       </div>
                   </div>
                   <div class="form-item">
                       <div class="form-text">
                           <div class="form-name">Телефон</div>
                           <input class="form-cost" name="phone" placeholder="+7 (999) 999 99-99" required>
+                          <div class="error-message" id="phoneError"></div>
                       </div>
                   </div>
                   <div class="form-item">
                       <div class="form-text">
                           <div class="form-name">Сумма долга</div>
                           <input class="form-cost" name="debt" placeholder="Введите сумму долга" required>
+                          <div class="error-message" id="debtError"></div>
                       </div>
                   </div>
                   <div class="form-item">
                       <div class="form-text">
                           <div class="form-name">Есть ли просрочки?</div>
                           <select class="form-cost" name="mortgage" required>
-                              <option value="" disabled selected hidden>Выберите вариант</option>
+                              <option value="" disabled selected hidden required>Выберите вариант</option>
                               <option value="Да">Да</option>
                               <option value="Нет">Нет</option>
                           </select>
+                          <div class="error-message" id="mortgageError"></div>
                       </div>
                   </div>
                   <div class="form-item">
                       <div class="form-text">
                           <div class="form-name">Регион проживания</div>
                           <input class="form-cost" name="region" placeholder="Введите регион" required>
+                          <div class="error-message" id="regionError"></div>
                       </div>
                   </div>
-                  <div class="form-btn" id="submitForm">
+                  <button class="form-btn" id="submitForm">
                       Отправить
-                  </div>
-              </div>
+                  </button>
+                </form>
           </div>
       </div>
   </div>
@@ -1209,18 +1214,28 @@
         <div class="free-consult-tltle">Записаться на консультацию</div>
         <form id="freeConsultForm">
             <input type="text" name="name" placeholder="Имя" required>
-            <input type="tel" name="phone" placeholder="Телефон" required>
+            <div class="error-message" id="nameError"></div>
+
+            <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" required>
+            <div class="error-message" id="phoneError"></div>
+
             <input type="number" name="debt" placeholder="Сумма долга" required>
+            <div class="error-message" id="debtError"></div>
+
             <select name="mortgage" required>
-                <option value="" disabled selected hidden>Есть ли просрочки?</option>
+                <option value="" disabled selected hidden required>Есть ли просрочки?</option>
                 <option value="Да">Да</option>
                 <option value="Нет">Нет</option>
             </select>
+            <div class="error-message" id="mortgageError"></div>
+
             <input type="text" name="region" placeholder="Регион проживания" required>
-            <button type="submit" class="free-consult-submit">Отправить</button>
+            <div class="error-message" id="regionError"></div>
+
+            <button type="submit" class="free-consult-submit" id="freeConsultSubmit">Отправить</button>
         </form>
     </div>
-  </div>
+</div>
 </div>
 <script>
 
@@ -1491,61 +1506,143 @@ window.addEventListener("click", (event) => {
     }
 });
 
-document.getElementById("freeConsultForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  function validateInput(input, errorMessageElement, validationFunction, errorMessage) {
+    const value = input.value.trim();
+    if (!validationFunction(value)) {
+        errorMessageElement.textContent = errorMessage;
+        errorMessageElement.classList.add("show"); 
+        input.classList.add("invalid");
+        return false;
+    } else {
+        errorMessageElement.textContent = "";
+        errorMessageElement.classList.remove("show"); 
+        input.classList.remove("invalid");
+        return true;
+    }
+}
 
-    const formData = new FormData(this);
 
-    fetch('/send_email', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Сетевая ошибка');
+
+    function isNotEmpty(value) {
+        return value.length > 0;
+    }
+
+    function isDebtValid(value) {
+        return /^[1-9]\d*$/.test(value);
+    }
+
+    function isTextValid(value) {
+        return /^[А-Яа-яЁё\s-]+$/.test(value);
+    }
+
+    function setupValidation(formId, buttonId) {
+      const form = document.getElementById(formId);
+    const submitButton = document.getElementById(buttonId);
+
+    const phoneInput = form.querySelector('input[name="phone"]');
+
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(event) {
+            let value = event.target.value.replace(/\D/g, '');  // Убираем все нецифровые символы
+
+            if (value.startsWith('8')) {
+                value = '7' + value.slice(1);  // Если начинается с 8, заменяем на 7
+            } else if (!value.startsWith('7')) {
+                value = '7' + value;  // Если вообще нет 7, добавляем её
+            }
+
+            if (value.length > 11) value = value.slice(0, 11);  // Ограничиваем до 11 цифр (учитывая +7)
+
+            let formattedValue = '+7';  // Начинаем с +7
+
+            if (value.length > 1) {
+                formattedValue += '(' + value.slice(1, 4);
+            }
+
+            if (value.length > 4) {
+                formattedValue += ') ' + value.slice(4, 7);
+            }
+
+            if (value.length > 7) {
+                formattedValue += '-' + value.slice(7, 9);
+            }
+
+            if (value.length > 9) {
+                formattedValue += '-' + value.slice(9, 11);
+            }
+
+            event.target.value = formattedValue;  // Устанавливаем отформатированное значение
+        });
+
+        // Блокируем ввод недопустимых символов
+        phoneInput.addEventListener('keydown', function(event) {
+            const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete']; // Разрешённые клавиши
+            const isNumber = /^[0-9]$/.test(event.key); // Разрешены только цифры
+
+            if (!allowedKeys.includes(event.key) && !isNumber) {
+                event.preventDefault();
+            }
+        });
+    }
+
+    const fields = [
+        {
+            input: form.querySelector('input[name="name"]'),
+            errorMessageElement: form.querySelector("#nameError"),
+            validationFunction: isTextValid,
+            errorMessage: "Имя должно содержать только кириллицу",
+        },
+        {
+            input: form.querySelector('input[name="debt"]'),
+            errorMessageElement: form.querySelector("#debtError"),
+            validationFunction: isDebtValid,
+            errorMessage: "Введите корректную сумму долга",
+        },
+        {
+            input: form.querySelector('select[name="mortgage"]'),
+            errorMessageElement: form.querySelector("#mortgageError"),
+            validationFunction: isNotEmpty,
+            errorMessage: "Выберите вариант",
+        },
+        {
+            input: form.querySelector('input[name="region"]'),
+            errorMessageElement: form.querySelector("#regionError"),
+            validationFunction: isTextValid,
+            errorMessage: "Регион должен содержать только кириллицу",
+        },
+    ];
+
+    fields.forEach(({ input, errorMessageElement, validationFunction, errorMessage }) => {
+        if (input) {
+            input.addEventListener("input", function () {
+                const isValid = validateInput(input, errorMessageElement, validationFunction, errorMessage);
+            });
         }
-        return response.text();
-      })
-    .then(data => {
-        alert(data);
-        document.getElementById("freeConsultModal").style.display = "none";
-        document.body.classList.remove("no-scroll");
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
     });
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (submitButton.disabled) return;
+
+            const formData = new FormData(form);
+            fetch('/send_email', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+        });
+    }
+    setupValidation("freeConsultForm", "freeConsultSubmit");
+    setupValidation("form-content", "submitForm");
 });
-
-
-document.getElementById("submitForm").addEventListener("click", function() {
-    const formData = new FormData();
-
-    const name = document.querySelector('input[name="name"]').value;
-    const phone = document.querySelector('input[name="phone"]').value;
-    const debt = document.querySelector('input[name="debt"]').value;
-    const mortgage = document.querySelector('select[name="mortgage"]').value;
-    const region = document.querySelector('input[name="region"]').value;
-
-    formData.append('name', name);
-    formData.append('phone', phone);
-    formData.append('debt', debt);
-    formData.append('mortgage', mortgage);
-    formData.append('region', region);
-
-    fetch('/send_email', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert(data);
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-    });
-});
-
-
 
 
 const stagesList = document.getElementById('stagesList');
