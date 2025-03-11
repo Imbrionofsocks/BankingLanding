@@ -21,35 +21,6 @@ const getMimeType = (ext) => {
     return mimeTypes[ext] || 'application/octet-stream';
 };
 
-const sendTelegramMessage = async (message, chatIds) => {
-    const botToken = '8014313567:AAGYm39AA6G_nY9lR5K74Yw5oxK2uOUI6MU'; // Замените на ваш токен бота
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-    for (const chatId of chatIds) {
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error(`Ошибка при отправке сообщения в Telegram для chat_id: ${chatId}`);
-            }
-
-            const data = await response.json();
-            console.log(`Сообщение отправлено в chat_id: ${chatId}`, data);
-        } catch (error) {
-            console.error(`Ошибка при отправке сообщения в chat_id: ${chatId}`, error);
-        }
-    }
-};
-
 const server = http.createServer((req, res) => {
     if (req.method === 'POST' && req.url === '/send_email') {
         const form = new formidable.IncomingForm();
