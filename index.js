@@ -65,23 +65,16 @@ const server = http.createServer((req, res) => {
 
     fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
-
-            if (!ext) {
-                const indexPath = path.join(__dirname, 'index.html');
-                fs.readFile(indexPath, (err, data) => {
-                    if (err) {
-                        res.writeHead(500, { 'Content-Type': 'text/plain' });
-                        res.end('Ошибка на сервере');
-                        return;
-                    }
-
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(data);
-                });
-            } else {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Файл не найден');
-            }
+            const path404 = path.join(__dirname, '404.html');
+            fs.readFile(path404, (err404, data404) => {
+                if (err404) {
+                    res.writeHead(404, { 'Content-Type': 'text/plain' });
+                    res.end('404 Not Found');
+                } else {
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.end(data404);
+                }
+            });
             return;
         }
 
