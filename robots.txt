@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /node_modules/
+Disallow: /court_decisions/
+CleanParam: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_referer /
+CleanParam: yclid&ymclid&gclid&fbclid /
+CleanParam: yabizcmpgn&utm_candidate&etext&ybaip /
+
+Sitemap: https://bankrot-urist.ru/sitemap.xml
