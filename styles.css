@@ -603,6 +603,7 @@ margin:3rem;
 }
 
 .intro .interactive-block .intro-name-first{
+    display: block; /* added for h1 span */
 color:var(--color-white);
 width: 100%;
 font-family: "Geologica Bold",sans-serif;
@@ -610,6 +611,7 @@ font-size:96px;
 }
 
 .intro .interactive-block .intro-name-second{
+    display: block; /* added for h1 span */
 color:var(--color-white);
 width: 100%;
 font-family: "Geologica Bold",sans-serif;
@@ -1466,6 +1468,7 @@ width: 20rem;
         display: none;
     }
     .intro .interactive-block .intro-name-first{
+    display: block; /* added for h1 span */
     color:var(--color-white);
     text-align: start;
     width: 100%;
@@ -1475,6 +1478,7 @@ width: 20rem;
     }
     
     .intro .interactive-block .intro-name-second{
+    display: block; /* added for h1 span */
     color:var(--color-white);
     text-align: start;
     width: 100%;
