@@ -166,7 +166,7 @@ html,body {
     cursor: pointer;
 }
 
-.fancybox-close-small svg {
+.fancybox-close-small svg, .fancybox-close-small .svg-icon {
     width: 24px;
     height: 24px;
 }
@@ -682,7 +682,7 @@ padding-bottom: 2rem;
     margin-top:80px;
     }
 
-.intro .picture-block svg{
+.intro .picture-block svg, .intro .picture-block .svg-icon{
         width:90%;
         height: 90%;
 }
@@ -915,7 +915,7 @@ cursor:pointer
     gap:1rem;
     border-radius: 0.75rem;
 }
-.white-btn svg{
+.white-btn svg, .white-btn .svg-icon{
 min-width: 3rem;
 min-height: 3rem;
 }
@@ -1225,7 +1225,7 @@ cursor: pointer;
         width: 4rem;
         height: 4rem;
     }
-    .advantages-icon svg{
+    .advantages-icon svg, .advantages-icon .svg-icon{
         width: 4rem !important;
         height: 4rem !important;
     }
@@ -1273,7 +1273,7 @@ cursor: pointer;
     opacity: 0.8;
 }
 
-.control svg {
+.control svg, .control .svg-icon {
     width: 20px;
     height: 20px;
 }
@@ -1526,7 +1526,7 @@ width: 20rem;
     .steps-item{
         min-width: 100%;
     }
-    .intro .picture-block svg{
+    .intro .picture-block svg, .intro .picture-block .svg-icon{
         width: 20rem;
         height: auto;
     }
@@ -1660,7 +1660,7 @@ align-items: center;
 padding-bottom: 2rem;
 
 }
-.advantages-icon svg{
+.advantages-icon svg, .advantages-icon .svg-icon{
     width: 5rem;
     height: 5rem;
 }
