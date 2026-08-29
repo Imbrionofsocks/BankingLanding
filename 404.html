@@ -442,4 +442,25 @@
                 </div>
             </div>
     </div>
-    </body></html>
+    <script>
+function toggleMenu() {
+    const sideSheet = document.querySelector('.side-sheet');
+    const overlay = document.querySelector('.overlay');
+    const burgerIcon = document.querySelector('.burger-icon');
+
+    if (sideSheet) sideSheet.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+    if (burgerIcon) burgerIcon.classList.toggle('active');
+
+    document.body.classList.toggle('no-scroll', sideSheet && sideSheet.classList.contains('active'));
+}
+
+const overlayElement = document.querySelector('.overlay');
+if (overlayElement) {
+    overlayElement.addEventListener('click', () => {
+        toggleMenu();
+    });
+}
+</script>
+</body>
+</html>
