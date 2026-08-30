@@ -94,48 +94,53 @@ const server = http.createServer((req, res) => {
 
     let sanitizedPath;
     try {
-    sanitizedPath = decodeURIComponent(req.url.split('?')[0]);
+        sanitizedPath = decodeURIComponent(req.url.split('?')[0]);
     } catch (decodeError) {
-    res.writeHead(400, { 'Content-Type': 'text/plain' });
-    res.end('Некорректный URL');
-    return;
+        res.writeHead(400, { 'Content-Type': 'text/plain' });
+        res.end('Некорректный URL');
+        return;
     }
-    const filePath = path.join(__dirname, sanitizedPath === '/' ? 'index.html' : sanitizedPath);
 
-    const ext = path.extname(filePath);
-
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (err) {
-
-            if (!ext) {
-                const indexPath = path.join(__dirname, 'index.html');
-                fs.readFile(indexPath, (err, data) => {
-                    if (err) {
-                        res.writeHead(500, { 'Content-Type': 'text/plain' });
-                        res.end('Ошибка на сервере');
-                        return;
-                    }
-
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(data);
-                });
-            } else {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Файл не найден');
-            }
-            return;
-        }
-
-        fs.readFile(filePath, (err, data) => {
+    if (sanitizedPath === '/' || sanitizedPath === '/index.html') {
+        const indexPath = path.join(__dirname, 'index.html');
+        fs.readFile(indexPath, (err, data) => {
             if (err) {
                 res.writeHead(500, { 'Content-Type': 'text/plain' });
                 res.end('Ошибка на сервере');
                 return;
             }
-
-            res.writeHead(200, { 'Content-Type': getMimeType(ext) });
+            res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(data);
         });
+        return;
+    }
+
+    const filePath = path.join(__dirname, sanitizedPath);
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+        if (!err) {
+            // Файл существует – отдаём его
+            const ext = path.extname(filePath);
+            fs.readFile(filePath, (err, data) => {
+                if (err) {
+                    res.writeHead(500, { 'Content-Type': 'text/plain' });
+                    res.end('Ошибка на сервере');
+                    return;
+                }
+                res.writeHead(200, { 'Content-Type': getMimeType(ext) });
+                res.end(data);
+            });
+        } else {
+            const notFoundPath = path.join(__dirname, '404.html');
+            fs.readFile(notFoundPath, (err, data) => {
+                if (err) {
+                    res.writeHead(404, { 'Content-Type': 'text/plain' });
+                    res.end('404 Not Found');
+                    return;
+                }
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.end(data);
+            });
+        }
     });
 });
 server.listen(PORT, () => {
