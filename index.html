@@ -806,13 +806,13 @@
                     8 927 512-52-52
                   </div>
                   <div class="footer-socials-block-2">
-                    <div class="footer-socials-whatsapp">
+                    <a href="https://wa.me/+79275125252" class="footer-socials-whatsapp">
                       <img src="assets/svg/icon-whatsapp.svg" alt="WhatsApp" class="svg-icon" style="border-radius: 50%;" width="30" height="30">
                         
-                    </div>
-                    <div class="footer-socials-tg">
+                    </a>
+                    <a href="https://t.me/bankrotnyurist" class="footer-socials-tg">
                         <img src="assets/svg/icon-telegram.svg" alt="Telegram" class="svg-icon" style="border-radius: 50%;" width="30" height="30">                     
-                    </div>
+                    </a>
                   </div>
                   </div>
                   <div class="footer-interactive-item">
@@ -838,13 +838,13 @@
                 </div>
                 <div class="footer-socials">
                     <div class="footer-socials-block">
-                      <div class="footer-socials-whatsapp">
+                      <a href="https://wa.me/+79275125252" class="footer-socials-whatsapp">
                         <img src="assets/svg/icon-whatsapp.svg" alt="WhatsApp" class="svg-icon" style="border-radius: 50%;" width="30" height="30">
                           
-                      </div>
-                      <div class="footer-socials-tg">
+                      </a>
+                      <a href="https://t.me/bankrotnyurist" class="footer-socials-tg">
                           <img src="assets/svg/icon-telegram.svg" alt="Telegram" class="svg-icon" style="border-radius: 50%;" width="30" height="30">                     
-                      </div>
+                      </a>
                     </div>
                 </div>
                 </div>
@@ -959,22 +959,6 @@ function toggleMenu() {
 document.querySelector('.overlay').addEventListener('click', () => {
     toggleMenu();
 });
-    document.querySelectorAll('.faq-item').forEach(item => {
-        const button = item.querySelector('.faq-button');
-        const text = item.querySelector('.faq-text');
-
-        item.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-
-            document.querySelectorAll('.faq-item.active').forEach(activeItem => {
-                if (activeItem !== item) {
-                    activeItem.classList.remove('active');
-                }
-            });
-
-            item.classList.toggle('active', !isActive);
-        });
-    });
     const track = document.querySelector('.carousel-track');
 const items = document.querySelectorAll('.carousel-item');
 const prevButton = document.getElementById('prev');
