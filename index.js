@@ -5,6 +5,11 @@ const formidable = require('formidable');
 
 const PORT = 3000;
 
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+    process.exit(1);
+});
+
 const getMimeType = (ext) => {
     const mimeTypes = {
         '.html': 'text/html',
@@ -87,7 +92,14 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    const sanitizedPath = decodeURIComponent(req.url.split('?')[0]);
+    let sanitizedPath;
+    try {
+    sanitizedPath = decodeURIComponent(req.url.split('?')[0]);
+    } catch (decodeError) {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('Некорректный URL');
+    return;
+    }
     const filePath = path.join(__dirname, sanitizedPath === '/' ? 'index.html' : sanitizedPath);
 
     const ext = path.extname(filePath);

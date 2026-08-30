@@ -1522,22 +1522,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 
+  function isNotEmpty(value) {
+    return value.length > 0;
+  }
 
+  function isDebtValid(value) {
+    return /^[1-9]\d*$/.test(value);
+  }
 
-    function isNotEmpty(value) {
-        return value.length > 0;
-    }
+  function isTextValid(value) {
+    return /^[А-Яа-яЁё\s-]+$/.test(value);
+  }
 
-    function isDebtValid(value) {
-        return /^[1-9]\d*$/.test(value);
-    }
-
-    function isTextValid(value) {
-        return /^[А-Яа-яЁё\s-]+$/.test(value);
-    }
-
-    function setupValidation(formId, buttonId) {
-      const form = document.getElementById(formId);
+  function setupValidation(formId, buttonId) {
+    const form = document.getElementById(formId);
     const submitButton = document.getElementById(buttonId);
 
     const phoneInput = form.querySelector('input[name="phone"]');
@@ -1621,28 +1619,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            if (submitButton.disabled) return;
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        // Проверяем, есть ли хотя бы одно видимое сообщение об ошибке
+        const errorMessages = form.querySelectorAll(".error-message.show");
+        if (errorMessages.length > 0) {
+            // Если есть видимые ошибки, отменяем отправку формы
+            return;
+        }
 
-            const formData = new FormData(form);
-            fetch('/send_email', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                form.reset();
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-            });
+        if (submitButton.disabled) return;
+
+        const formData = new FormData(form);
+        fetch('/send_email', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
         });
-    }
-    setupValidation("freeConsultForm", "freeConsultSubmit");
-    setupValidation("form-content", "submitForm");
+    });
+}
+
+setupValidation("freeConsultForm", "freeConsultSubmit");
+setupValidation("form-content", "submitForm");
+
 });
+
 
 
 const stagesList = document.getElementById('stagesList');
