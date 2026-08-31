@@ -1,7 +1,6 @@
-User-agent: *
+﻿User-agent: *
 Disallow: /node_modules/
 Disallow: /court_decisions/
-CleanParam: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_referer /
-CleanParam: yclid&ymclid&gclid&fbclid /
-CleanParam: yabizcmpgn&utm_candidate&etext&ybaip /
-
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_referer /
+Clean-param: yclid&ymclid&gclid&fbclid /
+Clean-param: yabizcmpgn&utm_candidate&etext&ybaip /
