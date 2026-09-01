@@ -1766,3 +1766,19 @@ color:var(--color-gold);
         padding: 0 1rem 1rem 1rem;
     }
 }
+
+.advantages-main-title {
+    color: var(--color-main-dark-accent);
+    font-family: 'Geologica Bold';
+    font-size: 32px;
+    text-align: center;
+    padding-top: 3rem;
+    margin-bottom: -2rem; /* offset the 5rem padding of advantages-content */
+}
+@media (max-width: 768px) {
+    .advantages-main-title {
+        font-size: 24px;
+        padding-top: 2rem;
+        margin-bottom: 0;
+    }
+}
