@@ -137,7 +137,7 @@ const server = http.createServer((req, res) => {
                     res.end('404 Not Found');
                     return;
                 }
-                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
                 res.end(data);
             });
         }
