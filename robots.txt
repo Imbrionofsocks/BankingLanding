@@ -1,6 +1,12 @@
-﻿User-agent: *
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /court_decisions/
 Disallow: /node_modules/
-Disallow: /court_decisions/
+Disallow: /package.json
+Disallow: /package-lock.json
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_referer /
 Clean-param: yclid&ymclid&gclid&fbclid /
 Clean-param: yabizcmpgn&utm_candidate&etext&ybaip /
+Host: bankrot-urist.ru
+Sitemap: https://bankrot-urist.ru/sitemap.xml
